@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../static/css/home.css">
+  <link rel="icon" type="image/svg+xml" href="../static/img/favicon.png"/>
+  <title>Главная страница</title>
+</head>
+<body class="wrapper">
+
+<header class="header">
+
+ <div class="logo_header">
+    <div class="logo">
+        TBH
+    </div>
+
+    <img class="logo2" src="../static/img/logo2.png" alt="logo sovkombank" width="250px" height="30px">
+</div>
+
+  <div>
+    <form method="post" action="{% url 'logoutxz' %}">
+      {% csrf_token %}
+      <p class="subtitle">
+        <button type="submit" class="link"
+        >
+          Выйти
+        </button>
+      </p>
+
+    </form>
+  </div>
+
+</header>
+
+<div class="menuBlock">
+  <div class="menu">
+    <h1 class="title">Задачи</h1>
+
+    {% for el in task %}
+      <div>
+        <h1>{{ el.task }}</h1>
+        <p>{{ el.taskAll }}</p>
+        <p>{{ el.date }}</p>
+        <p style='color:white;'>{{ el.address }}</p>
+        <div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/35/krasnodar/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;"></a><a href="https://yandex.ru/maps/35/krasnodar/?ll=38.998420%2C45.043901&utm_medium=mapframe&utm_source=maps&z=11.92" style="color:#eee;font-size:12px;position:absolute;top:14px;"></a><iframe src="https://yandex.ru/map-widget/v1/?ll=38.998420%2C45.043901&z=11.92" width="560" height="400" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
+        <form method="post">
+          {% csrf_token %}
+          <button class="do" type="submit" name="delete_task" value="{{ el.id }}">Выполнить</button>
+        </form>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+</body>
+</html>
